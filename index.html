@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <div class="form-title text-center my-4">Payment Details</div>
+        <!-- Start of form -->
+        <form id="paymentForm">
+
+            <div class="form-row mb-3">
+                <!-- Card Number -->
+                <div class="form-group col-md-6">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" placeholder="XXXXXXXXXX" required>
+                    <div class="invalid-feedback">Please enter your card number.</div>
+                </div>
+
+                <!-- CVC -->
+                <div class="form-group col-md-3">
+                    <label for="cvc">CVC</label>
+                    <input type="text" class="form-control" id="cvc" placeholder="CVC" required>
+                    <div class="invalid-feedback">Please enter your CVC.</div>
+                </div>
+
+                <!-- Amount -->
+                <div class="form-group col-md-3">
+                    <label for="amount">Amount</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text" class="form-control" id="amount" placeholder="Amount" required>
+                        <div class="invalid-feedback">Please enter the amount.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mb-3">
+                <!-- First Name -->
+                <div class="form-group col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                    <div class="invalid-feedback">Please enter your first name.</div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                    <div class="invalid-feedback">Please enter your last name.</div>
+                </div>
+            </div>
+
+            <div class="form-row mb-3">
+                <!-- City -->
+                <div class="form-group col-md-6">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="City" required>
+                    <div class="invalid-feedback">Por favor introduce la ciudad.</div>
+                </div>
+
+                <!-- State -->
+                <div class="form-group col-md-4">
+                    <label for="state">State</label>
+                    <select id="state" class="form-control" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>New York</option>
+                        <option>California</option>
+                        <option>Florida</option>
+                        <option>Texas</option>
+                        <option>Ohio</option>
+                        <option>Washington</option>
+                    </select>
+                    <div class="invalid-feedback">Por favor selecciona un estado.</div>
+                </div>
+
+                <!-- Postal Code -->
+                <div class="form-group col-md-2">
+                    <label for="postalCode">Postal Code</label>
+                    <input type="text" class="form-control" id="postalCode" placeholder="Postal Code" required>
+                    <div class="invalid-feedback">Por favor introduce tu codigo postal.</div>
+                </div>
+            </div>
+
+            <div class="form-row mb-3">
+                <!-- Card Type Selection -->
+                <div class="form-group col-md-6">
+                    <label>Card Type</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="cardType" id="visa" value="Visa" required>
+                        <label class="form-check-label" for="visa">Visa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="cardType" id="mastercard" value="MasterCard" required>
+                        <label class="form-check-label" for="mastercard">MasterCard</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="cardType" id="amex" value="American Express" required>
+                        <label class="form-check-label" for="amex">American Express</label>
+                    </div>
+                    <div class="invalid-feedback">Please select a card type.</div>
+                </div>
+
+                <!-- Message Area -->
+                <div class="form-group col-md-6">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" rows="3" placeholder="Your message (optional)"></textarea>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary btn-submit btn-block">Submit</button>
+        </form>
+        <!-- Fin de formulario -->
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var form = this;
+        var fields = form.querySelectorAll('input, select');
+        var firstInvalid = null;
+
+        // Loop por campo y para en el campo sin rellenar
+        for (var i = 0; i < fields.length; i++) {
+            if (!fields[i].checkValidity()) {
+                fields[i].classList.add('is-invalid');
+                if (!firstInvalid) {
+                    firstInvalid = fields[i];
+                }
+            } else {
+                fields[i].classList.remove('is-invalid');
+            }
+        }
+
+        // Se centra en el primer campo sin rellenar
+        if (firstInvalid) {
+            firstInvalid.focus();
+        } else {
+            form.submit();
+        }
+    });
+</script>
+</body>
+</html>
